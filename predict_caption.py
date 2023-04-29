@@ -1,10 +1,6 @@
-
-from typing import List
-
 from transformers import VisionEncoderDecoderModel, ViTImageProcessor, AutoTokenizer
 import torch
 from PIL import Image
-import gradio as gr
 
 model = VisionEncoderDecoderModel.from_pretrained('vit-gpt2-image-captioning')
 feature_extractor = ViTImageProcessor.from_pretrained(
@@ -28,3 +24,6 @@ def predict_step(image):
     preds = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
     preds = [pred.strip() for pred in preds]
     return preds[0]
+
+# image = Image.open('jon-parry-C8eSYwQkwHw-unsplash.jpg')
+# print(predict_step(image=image))
